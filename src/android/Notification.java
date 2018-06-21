@@ -169,7 +169,6 @@ public class Notification extends CordovaPlugin {
                 dlg.setMessage(message);
                 dlg.setTitle(title);
                 dlg.setCancelable(false);
-                dlg.setCanceledOnTouchOutside(false);
                 dlg.setPositiveButton(buttonLabel,
                         new AlertDialog.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
@@ -210,8 +209,6 @@ public class Notification extends CordovaPlugin {
                 dlg.setMessage(message);
                 dlg.setTitle(title);
                 dlg.setCancelable(false);
-                dlg.setCanceledOnTouchOutside(false);
-
 
                 // First button
                 if (buttonLabels.length() > 0) {
@@ -302,8 +299,6 @@ public class Notification extends CordovaPlugin {
                 dlg.setMessage(message);
                 dlg.setTitle(title);
                 dlg.setCancelable(false);
-                dlg.setCanceledOnTouchOutside(false);
-
                 
                 dlg.setView(promptInput);
                 
@@ -510,8 +505,9 @@ public class Notification extends CordovaPlugin {
     @SuppressLint("NewApi")
     private void changeTextDirection(Builder dlg){
         int currentapiVersion = android.os.Build.VERSION.SDK_INT;
-        dlg.create();
-        AlertDialog dialog =  dlg.show();
+        AlertDialog dialog = dlg.create();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
         if (currentapiVersion >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR1) {
             TextView messageview = (TextView)dialog.findViewById(android.R.id.message);
             messageview.setTextDirection(android.view.View.TEXT_DIRECTION_LOCALE);
